@@ -13,8 +13,9 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const MainContainer = styled.div`
+  box-sizing: border-box;
   display: grid;
-  grid-template-rows: 1fr 12fr 1fr;
+  grid-template-rows: 1fr 11fr 1fr;
   justify-items: center;
   width: 40vw;
   height: 95vh;
@@ -23,45 +24,34 @@ const MainContainer = styled.div`
 
   h1{
     align-self: flex-start;
-    border: 1px solid black
   }
-
-  /* div{
-    align-self: flex-start;
-  } */
 `
 
 const ChatContainer = styled.div`
-  display: grid;
-  grid-column-start: 1fr;
-  grid-column-end: 2fr;
-  /* word-wrap: break-word; */
+  display: flex;
 
-p{
+
+  /* grid-column-start: 1fr;
+  grid-column-end: 2fr; */
+
+/* p{
   display: grid;
   grid-column-start: 1fr;
   grid-column-end: 2fr;
-}
+} */
+`
+const BoaIdeia = styled.div`
+  display: flex;
 `
 
-
 const InputNome = styled.input`
-  height: 2.3em;
-  width: 10vw;
-  /* margin-left: 1em;
-  padding-left: 1em; */
+  /* height: 2em; */
+  width: 100px;
 `
 
 const InputMensagem = styled.input`
-  height: 2.3em;
-  width: 25vw;
-  /* margin-left: 1em;
-  padding-left: 1em; */
-`
-
-const BoaIdeia = styled.div`
-  display: flex;
-  align-items: flex-end;
+  /* height: 2em; */
+  flex-grow: 1
 `
   
 export class App extends React.Component {
@@ -107,9 +97,9 @@ export class App extends React.Component {
     const conversa = this.state.form.map((item) => {
 
       return (
-        <p>
+        <span>
           {item.valorInputNome} {item.valorInputMensagem}
-        </p>
+        </span>
       )
     })
 
