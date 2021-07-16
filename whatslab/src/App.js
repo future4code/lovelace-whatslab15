@@ -1,28 +1,30 @@
 import './App.css';
 import styled, { createGlobalStyle } from 'styled-components'
 import React from 'react';
-import { render } from '@testing-library/react';
+import { findByLabelText, render } from '@testing-library/react';
 import "./components/App.Styled"
 
 const GlobalStyle = createGlobalStyle`
 *{
   margin: 10px auto 0 auto;
-  overflow: auto
+  overflow: auto;
+  max-width: 100%;
 }
 `
 
 const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* justify-content: flex-end; */
-  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr 12fr 1fr;
+  justify-items: center;
   width: 40vw;
   height: 95vh;
   border: 1px solid black;
+  margin-bottom: 1em;
 
-  /* h1{
-    justify-self: flex-start;
-  } */
+  h1{
+    align-self: flex-start;
+    border: 1px solid black
+  }
 
   /* div{
     align-self: flex-start;
@@ -30,12 +32,18 @@ const MainContainer = styled.div`
 `
 
 const ChatContainer = styled.div`
-  /* display: flex;
-  justify-content: center;
-  background-color: red;
-  align-items: flex-start;
-  word-wrap: break-word; */
+  display: grid;
+  grid-column-start: 1fr;
+  grid-column-end: 2fr;
+  /* word-wrap: break-word; */
+
+p{
+  display: grid;
+  grid-column-start: 1fr;
+  grid-column-end: 2fr;
+}
 `
+
 
 const InputNome = styled.input`
   height: 2.3em;
@@ -53,8 +61,7 @@ const InputMensagem = styled.input`
 
 const BoaIdeia = styled.div`
   display: flex;
-  justify-content: flex-end;
-  background-color: blue;
+  align-items: flex-end;
 `
   
 export class App extends React.Component {
@@ -113,8 +120,9 @@ export class App extends React.Component {
 
         <GlobalStyle/>
 
+        <h1>WHATSLAB</h1>
+
         <ChatContainer>
-          <h1>WHATSLAB</h1>
           <p>{conversa}</p>
         </ChatContainer>
 
