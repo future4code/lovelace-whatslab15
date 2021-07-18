@@ -1,12 +1,11 @@
-import './App.css';
 import styled, { createGlobalStyle } from 'styled-components'
 import React from 'react';
 import { findByLabelText, render } from '@testing-library/react';
 import "./components/App.Styled"
+import sendButton from './img/send01.png'
 
 const GlobalStyle = createGlobalStyle`
 *{
-  margin: 10px auto 0 auto;
   overflow: auto;
   max-width: 100%;
 }
@@ -14,67 +13,60 @@ const GlobalStyle = createGlobalStyle`
 
 const MainContainer = styled.div`
   box-sizing: border-box;
-  display: grid;
-  grid-template-rows: 1fr 11fr 1fr;
-  justify-items: center;
-  width: 40vw;
-  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 100vh;
   border: 1px solid black;
-  margin-bottom: 1em;
+  margin: auto;
 
-  h1{
-    align-self: flex-start;
+  h1, h6{
+    align-self: center;
+    margin-top: 0;
   }
 `
 
 const ChatContainer = styled.div`
   display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
+  padding: 10px;
 
-
-  /* grid-column-start: 1fr;
-  grid-column-end: 2fr; */
-
-/* p{
-  display: grid;
-  grid-column-start: 1fr;
-  grid-column-end: 2fr;
-} */
 `
+
 const BoaIdeia = styled.div`
   display: flex;
 `
 
 const InputNome = styled.input`
-  /* height: 2em; */
   width: 100px;
 `
 
 const InputMensagem = styled.input`
-  /* height: 2em; */
-  flex-grow: 1
+  flex-grow: 1;
 `
-  
+
 export class App extends React.Component {
 
   state = {
 
     form: [
       {
-      valorInputNome: "",
-      valorInputMensagem: ""
+        valorInputNome: "",
+        valorInputMensagem: ""
       }
     ]
-    
+
   }
 
   onChangeInputNome = (event) => {
     console.log(event.target.value)
-    this.setState({valorInputNome: event.target.value})
+    this.setState({ valorInputNome: event.target.value })
   }
 
   onChangeInputMensagem = (event) => {
     console.log(event.target.value)
-    this.setState({valorInputMensagem: event.target.value})
+    this.setState({ valorInputMensagem: event.target.value })
   }
 
   addMensagem = () => {
@@ -83,23 +75,23 @@ export class App extends React.Component {
       valorInputNome: this.state.valorInputNome,
       valorInputMensagem: this.state.valorInputMensagem
     }
-  
-  const novaMensagem = [...this.state.form, newMessage]
 
-  this.setState({
-    form: novaMensagem,
-    valorInputMensagem: ""
+    const novaMensagem = [...this.state.form, newMessage]
+
+    this.setState({
+      form: novaMensagem,
+      valorInputMensagem: ""
     })
   }
 
   render() {
 
-    const conversa = this.state.form.map((item) => {
+    const conversa = this.state.form.map((item, index) => {
 
       return (
-        <span>
-          {item.valorInputNome} {item.valorInputMensagem}
-        </span>
+        <p key={index}>
+          <strong>{item.valorInputNome}</strong> {item.valorInputMensagem}
+        </p>
       )
     })
 
@@ -108,9 +100,10 @@ export class App extends React.Component {
     return (
       <MainContainer> {/* início tag pai */}
 
-        <GlobalStyle/>
+        <GlobalStyle />
 
         <h1>WHATSLAB</h1>
+        <h6>by Felipe & Guilherme</h6>
 
         <ChatContainer>
           <p>{conversa}</p>
@@ -128,7 +121,9 @@ export class App extends React.Component {
             value={this.state.valorInputMensagem}
             onChange={this.onChangeInputMensagem}
           />
-          <button onClick={this.addMensagem}>Enviar</button>
+          <button onClick={this.addMensagem} src={sendButton}>
+            Enviar
+            </button>
 
         </BoaIdeia> {/* final do formulário */}
 
